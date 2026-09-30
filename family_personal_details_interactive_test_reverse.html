@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Family & Personal Details — Reverse Challenge</title>
+<style>
+:root{--bg:#f6f8ff;--card:#fff;--ink:#1d2740;--muted:#667085;--accent:#4f67ff;--accent2:#ff9f43;--ok:#1f9d68;--bad:#d84b5b;--line:#e5e9f5}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(135deg,#f7f9ff,#fff7ec);color:var(--ink)}
+.wrap{max-width:1000px;margin:auto;padding:24px}.hero{background:linear-gradient(120deg,#4f67ff,#7b61ff);color:#fff;border-radius:24px;padding:26px;box-shadow:0 12px 35px #4f67ff22}
+.hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,42px)}.hero p{margin:0;opacity:.9}.topbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.pill{background:#ffffff20;padding:9px 13px;border-radius:999px}.progress{height:12px;background:#ffffff35;border-radius:99px;overflow:hidden;flex:1;min-width:180px}.progress i{display:block;height:100%;width:0;background:#ffd166;transition:.3s}
+.card{background:var(--card);margin-top:18px;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 8px 28px #3341550d}.card h2{margin:0 0 8px}.instruction{color:var(--muted);margin:0 0 18px}
+.row{padding:14px 0;border-top:1px dashed var(--line)}.row:first-of-type{border-top:0}.q{font-weight:700;margin-bottom:9px}
+.letters{display:flex;gap:7px;flex-wrap:wrap}.letter{width:42px;height:42px;border:2px solid #d8def2;background:#fff;border-radius:11px;font-size:20px;font-weight:800;cursor:pointer}.letter:hover{border-color:var(--accent);transform:translateY(-1px)}
+.build{min-height:45px;padding:9px 12px;border:2px dashed #cdd5ee;border-radius:12px;margin:9px 0;background:#fafbff;font-size:20px;letter-spacing:2px}.build button{border:0;background:#eef1ff;margin:2px;padding:5px 8px;border-radius:8px;cursor:pointer;font-weight:800}
+select,.choice{font:inherit}.select{padding:10px 12px;border:2px solid #dbe1f2;border-radius:11px;background:#fff;min-width:160px}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px}.choice{padding:11px 12px;border:2px solid #dbe1f2;background:#fff;border-radius:12px;cursor:pointer;text-align:left}.choice.selected{border-color:var(--accent);background:#eef0ff}
+.feedback{min-height:22px;margin-top:8px;font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;background:var(--accent);color:#fff}.btn.secondary{background:#eef1ff;color:var(--accent)}.btn.orange{background:var(--accent2)}
+.table{overflow:auto}.grid{border-collapse:collapse;width:100%;min-width:620px}.grid th,.grid td{border:1px solid var(--line);padding:10px;text-align:center}.grid th:first-child,.grid td:first-child{text-align:left;font-weight:700}.yes{color:var(--ok);font-weight:900}.no{color:var(--bad);font-weight:900}
+.scorebox{text-align:center;padding:28px}.score{font-size:56px;font-weight:900;color:var(--accent)}.stars{font-size:34px}.hidden{display:none}
+.small{font-size:13px;color:var(--muted)} input[type=text]{padding:10px;border:2px solid #dbe1f2;border-radius:10px;font:inherit;max-width:180px}
+@media(max-width:600px){.wrap{padding:12px}.card{padding:16px}.letter{width:38px;height:38px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+<h1>Family & Personal Details — Reverse Challenge</h1>
+<p>Same topics — new direction, new names and new examples.</p>
+<div class="topbar"><span class="pill" id="counter">0 / 28 answered</span><div class="progress"><i id="bar"></i></div><span class="pill">100 points</span></div>
+</section>
+
+<section class="card" id="s1">
+<h2>1. Family pairs — the other way round</h2>
+<p class="instruction">Now you see the word from the other side of the pair. Build its partner from the mixed letters.</p>
+<div id="builders"></div>
+<div class="btns"><button class="btn" onclick="checkBuilders()">Check this part</button><button class="btn secondary" onclick="resetBuilders()">Clear</button></div>
+</section>
+
+<section class="card" id="s2">
+<h2>2. Countries & nationalities — reverse</h2>
+<p class="instruction">This time the country/nationality direction has been changed.</p>
+<div id="countryQs"></div>
+<button class="btn" onclick="checkGroup('countryQs')">Check this part</button>
+</section>
+
+<section class="card" id="s3">
+<h2>3. Have got / Be — new people</h2>
+<p class="instruction">Study the NEW table carefully. Then choose the correct word for every gap.</p>
+<div class="table"><table class="grid">
+<tr><th></th><th>football</th><th>watch</th><th>skateboard</th><th>computer</th><th>camera</th></tr>
+<tr><td>Emma</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td></tr>
+<tr><td>Ben</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+<tr><td>Kate</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+<tr><td>Tom</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td></tr>
+</table></div>
+<div id="grammarQs"></div>
+<button class="btn" onclick="checkGroup('grammarQs')">Check this part</button>
+</section>
+
+<section class="card" id="s4">
+<h2>4. Possessives — new sentences</h2>
+<p class="instruction">Choose the possessive pronoun or adjective that completes each sentence.</p>
+<div id="possQs"></div>
+<button class="btn" onclick="checkGroup('possQs')">Check this part</button>
+</section>
+
+<section class="card" id="s5">
+<h2>5. Opposites — reverse direction</h2>
+<p class="instruction">Choose the best opposite. Don’t just look at one word — read the whole phrase.</p>
+<div id="oppQs"></div>
+<button class="btn" onclick="checkGroup('oppQs')">Check this part</button>
+</section>
+
+<section class="card" id="s6">
+<h2>6. Personal details — new people</h2>
+<p class="instruction">Choose the answer that fits each question.</p>
+<div id="matchQs"></div>
+<button class="btn" onclick="checkGroup('matchQs')">Check this part</button>
+</section>
+
+<section class="card">
+<h2>Finish the test</h2>
+<p class="instruction">You can change any answer before you finish.</p>
+<div class="btns"><button class="btn orange" onclick="finish()">Show my score</button><button class="btn secondary" onclick="location.reload()">Start again</button></div>
+<div id="result" class="scorebox hidden"></div>
+</section>
+</div>
+
+<script>
+const buildersData=[
+["mother","father"],["sister","brother"],["wife","husband"],["grandma","grandpa"],["aunt","uncle"],["daughter","son"]
+];
+let built={};
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function renderBuilders(){
+ let el=document.getElementById("builders"); el.innerHTML="";
+ buildersData.forEach((x,i)=>{
+  built[i]=built[i]||[];
+  let letters=shuffle(x[1].toUpperCase().split(""));
+  el.innerHTML+=`<div class="row" data-builder="${i}"><div class="q">${i+1}. ${x[0]} → <span class="small">${x[1][0]}...</span></div>
+  <div class="build" id="build${i}">${built[i].map((c,j)=>`<button onclick="removeLetter(${i},${j})">${c}</button>`).join("")}</div>
+  <div class="letters">${letters.map(c=>`<button class="letter" onclick="addLetter(${i},'${c}',this)">${c}</button>`).join("")}</div><div class="feedback" id="fbB${i}"></div></div>`;
+ });
+}
+function addLetter(i,c,b){built[i].push(c); b.disabled=true; document.getElementById("build"+i).innerHTML=built[i].map((x,j)=>`<button onclick="removeLetter(${i},${j})">${x}</button>`).join("");updateProgress()}
+function removeLetter(i,j){built[i].splice(j,1);renderBuilders();updateProgress()}
+function resetBuilders(){built={};renderBuilders();updateProgress()}
+function checkBuilders(){buildersData.forEach((x,i)=>{let ok=built[i].join("").toLowerCase()===x[1];document.getElementById("fbB"+i).innerHTML=ok?`<span class="ok">✓ Great!</span>`:`<span class="bad">Try again. Check the spelling.</span>`})}
+
+const groups={
+countryQs:[
+["Spanish — …",["Spain","Poland","Brazil","Britain"],"Spain"],
+["Poland — …",["Polish","Spanish","Brazilian","British"],"Polish"],
+["Brazilian — …",["Brazil","Britain","Spain","Poland"],"Brazil"],
+["British — …",["Britain","Brazil","Poland","Spain"],"Britain"]
+],
+grammarQs:[
+["1. … Emma got a camera? No, she … .",["Has / hasn't","Have / haven't","Is / isn't","Has / has"],"Has / hasn't"],
+["2. … Ben and Tom got cameras? Yes, they … . Their cameras … old.",["Have / have / are","Has / has / is","Have / has / is","Are / are / have"],"Have / have / are"],
+["3. … Kate got a red football? Yes, he …, but it … red. It … white.",["Has / has / isn't / is","Have / have / isn't / is","Has / hasn't / is / isn't","Is / is / isn't / has"],"Has / has / isn't / is"],
+["4. Emma and Ben … got skateboards.",["haven't","hasn't","aren't","isn't"],"haven't"],
+["5. Emma's and Kate's watches … expensive.",["aren't","isn't","hasn't","haven't"],"aren't"]
+],
+possQs:[
+["1. This is John and this is … brother.",["his","her","mine","theirs"],"his"],
+["2. That was Mary's car. It was … .",["hers","her","his","ours"],"hers"],
+["3. You can have this book. It's … .",["yours","your","mine","their"],"yours"],
+["4. Ann and Fiona are sisters. … surname is Harris.",["Their","Theirs","Her","Our"],"Their"],
+["5. I love … family.",["my","mine","me","their"],"my"]
+],
+oppQs:[
+["1. a young man ≠ …",["an old man","a tall man","a short man","a big man"],"an old man"],
+["2. a short boy ≠ …",["a tall boy","a young boy","an old boy","a small boy"],"a tall boy"],
+["3. small eyes ≠ …",["big eyes","short eyes","long eyes","curly eyes"],"big eyes"],
+["4. long hair ≠ …",["short hair","small hair","straight hair","tall hair"],"short hair"],
+["5. curly hair ≠ …",["straight hair","short hair","long hair","big hair"],"straight hair"]
+],
+matchQs:[
+["1. What's your name?",["Brazil","Kate","Twelve","Spanish"],"Kate"],
+["2. How old are you?",["Brazil","Kate","Twelve","Spanish"],"Thirteen"],
+["3. Where are you from?",["Brazil","Kate","Twelve","Spanish"],"Spain"],
+["4. What nationality are you?",["Brazil","Kate","Twelve","Spanish"],"Spanish"]
+]};
+let answers={};
+function renderGroup(id){
+ const root=document.getElementById(id); root.innerHTML="";
+ groups[id].forEach((q,i)=>{
+  let opts=shuffle(q[1]);
+  root.innerHTML+=`<div class="row"><div class="q">${q[0]}</div><div class="options">${opts.map(o=>`<button class="choice" data-group="${id}" data-i="${i}" data-v="${o.replaceAll('"','&quot;')}" onclick="choose(this)">${o}</button>`).join("")}</div><div class="feedback" id="fb_${id}_${i}"></div></div>`
+ })
+}
+function choose(b){let g=b.dataset.group,i=b.dataset.i;answers[g+"_"+i]=b.dataset.v;document.querySelectorAll(`[data-group="${g}"][data-i="${i}"]`).forEach(x=>x.classList.remove("selected"));b.classList.add("selected");updateProgress()}
+function checkGroup(id){groups[id].forEach((q,i)=>{let a=answers[id+"_"+i], ok=a===q[2];document.getElementById(`fb_${id}_${i}`).innerHTML=ok?`<span class="ok">✓ Well done!</span>`:`<span class="bad">Think again — one choice fits better.</span>`})}
+function updateProgress(){
+ let done=Object.keys(answers).length+Object.values(built).filter(x=>x&&x.length).length;
+ let total=28; document.getElementById("counter").textContent=`${done} / ${total} answered`;document.getElementById("bar").style.width=Math.min(100,done/total*100)+"%";
+}
+function finish(){
+ let correct=0,total=28;
+ buildersData.forEach((x,i)=>{if((built[i]||[]).join("").toLowerCase()===x[1])correct++});
+ Object.keys(groups).forEach(g=>groups[g].forEach((q,i)=>{if(answers[g+"_"+i]===q[2])correct++}));
+ let pct=Math.round(correct/total*100),stars=pct>=90?"★★★":pct>=70?"★★☆":pct>=50?"★☆☆":"☆☆☆";
+ let msg=pct>=90?"Excellent work!":pct>=70?"Very good — check the tricky ones.":pct>=50?"Good start — revise and try once more.":"Keep practising — you can improve it!";
+ let r=document.getElementById("result");r.classList.remove("hidden");r.innerHTML=`<div class="stars">${stars}</div><div class="score">${pct}%</div><h3>${correct} / ${total} correct</h3><p>${msg}</p><p class="small">Your answers stay on the page, so you can scroll up, rethink them and try again.</p>`;r.scrollIntoView({behavior:"smooth"});
+}
+renderBuilders();Object.keys(groups).forEach(renderGroup);updateProgress();
+</script>
+</body></html>
